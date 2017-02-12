@@ -1,0 +1,71 @@
+
+
+html{
+height: 100%;
+background: #b5f4ef; /* Old browsers */
+background: -moz-linear-gradient(top,  grey 0%,  black 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  grey 0%, black 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  grey 0%, black 100%);
+}
+
+article{
+	display: flex;
+	max-width: 900px;
+	margin: auto;
+	padding: 80px;
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url(../images/Vonique64.ttf);
+    
+}
+
+#wins{
+	background-color: transparent;
+	padding: 20px;
+	font-family: sans-serif;
+	font-weight: bold;
+	border: 1px solid white;
+}
+
+#question{
+	background-color: transparent;
+	padding-right: 20px;
+	min-height: 200px;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+#question h2{
+	font-family: sans-serif;
+
+}
+
+#question p{
+	font-family: sans-serif;
+	color: violet;
+}
+
+#question p:hover{
+	background-color: purple;
+	color: white;
+}
+
+#gameBox{
+	text-align: center;
+	color: white;
+	background-color: transparent;
+	border-radius: 20px;
+	flex: 1;
+	border: 1px solid white;
+	max-width: 900px;
+	box-shadow: 5px 5px 28px black;
+}
+
+#logo{
+	font-family: myFirstFont;
+	color: white;
+	font-size: 42px;
+	letter-spacing: 13px;
+}
