@@ -13,17 +13,20 @@ window.onload = function() {
 			Q1={
 				question: "How many dragons does Daenerys Targaryen have?",
 				correct: "Three",
-				options: ["Two", "Three", "Five"]
+				options: ["One Thousand", "Three", "Five"],
+				pic: "../images/dragons.jpg"
 			},
 			Q2={
 				question: "What does John Snow know?",
 				correct: "Nothing",
-				options: ["All", "Some Things", "Nothing"]
+				options: ["All", "How to Fight", "Nothing"],
+				pic: "../images/nothing.jpg"
 			},
 			Q1={
 				question: "Which one is not a real GOT House",
 				correct: "Strey",
-				options: ["Stark", "Frey", "Strey"]
+				options: ["Stark", "Tulley", "Strey"],
+				pic: "../images/houses.jpg"
 			}
 			],
 			
@@ -70,15 +73,23 @@ window.onload = function() {
 					 		if (TriviaGame.wins===3){
 							 	$("#question").html("<div>"+"YOU WIN"+"</div>");
 							 	clearInterval(countMaster);
+							 	for(i=0; i<3;i++){
+							 		$("#question").append("<br>"+TriviaGame.Questions[i].question+"<br>");
+							 		$("#question").append("<br>YOU ANSWERED: "+TriviaGame.Questions[i].correct+"<br>");
+							 	}
 					 		}
 				 			else{
 						 		TriviaGame.currentQ++;
+						 		setTimeout(TriviaGame.gameGetQuestion, 3000);
 						 		TriviaGame.reset();
-						 		TriviaGame.gameGetQuestion();
+						 		
 				 			}
 					}
 					else{
 						$("#question").append("<h3>"+"WRONG!"+"</h3><br>");
+						 var newSrc= TriviaGame.Questions[TriviaGame.currentQ].pic;
+						$("#question").append("Hint: <br>");
+						$("#question").append("<img>").attr("src", newSrc);
 
 					}
 				 });
