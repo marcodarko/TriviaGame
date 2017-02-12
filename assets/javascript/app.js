@@ -2,9 +2,10 @@ window.onload = function() {
 
 	var countMaster;
 
+
 	var TriviaGame={
 
-		time: 0,
+		time: 15,
 		wins: 0,
 		currentQ:0,
 
@@ -23,75 +24,110 @@ window.onload = function() {
 				question: "Which one is not a real GOT House",
 				correct: "Strey",
 				options: ["Stark", "Frey", "Strey"]
+			}
 			],
 			
 
 		printQuestion: function(){
-			
-				$("#question").append("<h2>"+ TriviaGame.Questions[currentQ].question+"</h2><br>");
-					for (i=0; i<3;i++){
-						$("#question").append("<p>"+ TriviaGame.Questions[currentQ].options[currentQ]+"</p><br>");
-					};
+				// prints question
+				$("#question").append("<h2>"+ TriviaGame.Questions[TriviaGame.currentQ].question+"</h2><br>");
+					// Prints choices
+				for (i=0; i<3; i++){
+					$("#question").append("<p>"+ TriviaGame.Questions[TriviaGame.currentQ].options[i]+"</p><br>" );
+				}
+
+
+				// ENDED UP NOT USING VALUES BUT JUST TEXT OF TAG
+
+				// var v1= TriviaGame.Questions[TriviaGame.currentQ].options[0];
+				// console.log(v1);
+				// var v2= TriviaGame.Questions[TriviaGame.currentQ].options[1];
+				// console.log(v2);
+				// var v3= TriviaGame.Questions[TriviaGame.currentQ].options[2];
+				// console.log(v3);
+
+				// $("#question p:first-child").attr("value", v1);
+				// $("#question p:nth-child(2)").attr("value", v2);
+				// $("#question p:nth-child(3)").attr("value", v3);
+				
 
 		},
 
 		gameGetQuestion: function () {
 
-			this.count();
-			this.printQuestion();
+				TriviaGame.gameCountStart();
+				TriviaGame.printQuestion();
 
-			 $("#options").on("click",function () {
-				if(TriviaGame.Questions[currentQ].correct indexOf(this)!= -1){
-			 		TriviaGame.wins++;
-			 		$("#wins").text("Wins: "+ TriviaGame.wins);
-			 		currentQ++;
-			}
-			 });
+				 $("#question p").on("click",function () {
 
-			 if (currentQ===3){
-			 	$("#question").html("YOU WIN");
-			 }
-		}
+				 	var x = $(this).text();
+
+				 	CurrentCorrectAnswer= TriviaGame.Questions[TriviaGame.currentQ].correct;
+
+					if(x == CurrentCorrectAnswer){
+				 		TriviaGame.wins++;
+				 		$("#wins").text("Correct Answers: "+ TriviaGame.wins);
+					 		if (TriviaGame.wins===3){
+							 	$("#question").html("<div>"+"YOU WIN"+"</div>");
+							 	clearInterval(countMaster);
+					 		}
+				 			else{
+						 		TriviaGame.currentQ++;
+						 		TriviaGame.reset();
+						 		TriviaGame.gameGetQuestion();
+				 			}
+					}
+					else{
+						$("#question").append("<h3>"+"WRONG!"+"</h3><br>");
+
+					}
+				 });
+		
+		},
 
 		gameCountStart: function(){
 
+			TriviaGame.reset();
 			countMaster= setInterval(TriviaGame.count, 1000);
 
 		},
 
 		reset: function(){
-			this.time=0;
+
+			clearInterval(countMaster);
+			$("#question").html(" ");
+			TriviaGame.time=15;
+
 		},
 
 		count: function() {
 
-		    this.time++;
+		    TriviaGame.time--;
 
-		    var converted = TriviaGame.timeConverter(TriviaGame.time);
+		    if(TriviaGame.time===0){
 
-		    $("#display").html(converted);
-	  },
+		    		clearInterval(countMaster);
 
-		timeConverter: function(t) {
+				 	$("#question").html("<div>"+"TIME'S OUT - YOU LOSE"+"</div>");
+				 }
 
-		    var minutes = Math.floor(t / 60);
-		    var seconds = t - (minutes * 60);
+			if(TriviaGame.time<10){
+				  $(".display").addClass("yellow");
+			}
+			if(TriviaGame.time<7){
+				  $(".display").addClass("orange");
+			}
+			if(TriviaGame.time<4){
+				  $(".display").addClass("red");
+			}
 
-		    if (seconds < 10) {
-		      seconds = "0" + seconds;
-		    }
+		    $(".display").text(TriviaGame.time);
 
-		    if (minutes === 0) {
-		      minutes = "00";
-		    }
-		    else if (minutes < 10) {
-		      minutes = "0" + minutes;
-		    }
-
-		    return seconds;
-	  },
+	  	}
 
 
 	};
+
+	TriviaGame.gameGetQuestion();
 
 };
