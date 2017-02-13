@@ -90,6 +90,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	padding: 5px;
 }
 
+#question a{
+	text-decoration: none;
+	color: yellow;
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
+
 #question p:hover{
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6a35a0+0,9766cc+48,6a35a0+100&0+0,1+47,0+100 */
 background: -moz-linear-gradient(left,  rgba(106,53,160,0) 0%, rgba(150,101,203,1) 47%, rgba(151,102,204,0.98) 48%, rgba(106,53,160,0) 100%); /* FF3.6-15 */

@@ -7,6 +7,8 @@ window.onload = function() {
 
 		time: 15,
 		wins: 0,
+		playagain: false,
+		incorrect:0,
 		currentQ:0,
 
 		Questions: [
@@ -77,6 +79,14 @@ window.onload = function() {
 							 		$("#question").append("<br>"+TriviaGame.Questions[i].question+"<br>");
 							 		$("#question").append("<br>YOU ANSWERED: "+TriviaGame.Questions[i].correct+"<br>");
 							 	}
+							 	$("#question").append("<br>"+"Number of Incorrect Answers: "+TriviaGame.incorrect);
+							 	$("#question").append("<br><br><a>PLAY AGAIN</a>");
+							 	$("#question a").on("click",function () {
+							 		TriviaGame.playagain=true;
+							 		if(TriviaGame.playagain){
+							 			TriviaGame.masterReset();
+							 		}
+							 	});
 					 		}
 				 			else{
 						 		TriviaGame.currentQ++;
@@ -86,6 +96,7 @@ window.onload = function() {
 					}
 					else{
 						$("#question").append("<h3>"+"WRONG!"+"</h3><br>");
+						TriviaGame.incorrect++;
 						 var newSrc= TriviaGame.Questions[TriviaGame.currentQ].pic;
 						 console.log("path to img: "+newSrc);
 						 // adding image Hint
@@ -96,6 +107,17 @@ window.onload = function() {
 					}
 				 });
 		
+		},
+
+		masterReset: function () {
+
+			clearInterval(countMaster);
+			$("#question").html(" ");
+			TriviaGame.time=15;
+			TriviaGame.currentQ=0;
+			TriviaGame.incorrect=0;
+			TriviaGame.wins=0;
+			TriviaGame.gameGetQuestion();
 		},
 
 		gameCountStart: function(){
